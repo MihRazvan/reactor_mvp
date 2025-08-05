@@ -1,8 +1,7 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Reactor } from './Reactor';
 import { GameUI } from './GameUI';
 import { useGameState } from '../hooks/useGameState';
-import { fastSetService } from '../services/fastSetService';
 import './Game.css';
 
 export const Game: React.FC = () => {

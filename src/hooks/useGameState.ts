@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import type { GameState, ClickResult, ReactorRing } from '../types/game';
 import { REACTOR_COLORS } from '../types/game';
-import { PI_STAGES, ENERGY_CONFIG, REACTOR_RING_CONFIG } from '../utils/gameConfig';
+import { PI_STAGES, ENERGY_CONFIG } from '../utils/gameConfig';
 import { fastSetService } from '../services/fastSetService';
 
 export const useGameState = () => {

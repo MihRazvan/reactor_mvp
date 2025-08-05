@@ -69,6 +69,33 @@ A fast-clicking reactor building game where players click colored reactor layers
 4. **Open your browser**
    Navigate to `http://localhost:5173`
 
+### Deployment
+
+#### Vercel Deployment (Recommended)
+
+1. **Install Vercel CLI** (optional)
+   ```bash
+   npm i -g vercel
+   ```
+
+2. **Deploy to Vercel**
+   ```bash
+   vercel
+   ```
+   
+   Or simply connect your GitHub repository to Vercel for automatic deployments.
+
+3. **Manual Deployment**
+   - Push your code to GitHub
+   - Connect your repository to Vercel
+   - Vercel will automatically build and deploy your app
+
+#### Other Deployment Options
+
+- **Netlify**: Connect your GitHub repo to Netlify
+- **GitHub Pages**: Use `npm run build` and deploy the `dist` folder
+- **Firebase Hosting**: Use Firebase CLI to deploy the `dist` folder
+
 ### Available Scripts
 
 - `npm run dev` - Start development server
