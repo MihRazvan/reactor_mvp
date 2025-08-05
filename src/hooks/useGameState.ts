@@ -12,7 +12,7 @@ export const useGameState = () => {
     isGameActive: true,
     lastClickTime: Date.now(),
     energyDecayTimer: 0,
-    timeRemaining: 4000, // 4 seconds for first stage
+    timeRemaining: 5000, // 5 seconds for first stage
     wrongClickStreak: 0,
     finalScore: 0,
     gameEnded: false,
@@ -35,14 +35,17 @@ export const useGameState = () => {
     const rings: ReactorRing[] = [];
     const targetColor = gameState.targetColor;
     
-    // Generate random colors for all rings
+    // Create a shuffled array of colors to ensure uniqueness
+    const shuffledColors = [...REACTOR_COLORS].sort(() => Math.random() - 0.5);
+    
+    // Generate unique colors for all rings
     for (let i = 0; i < 5; i++) {
-      const randomColor = REACTOR_COLORS[Math.floor(Math.random() * REACTOR_COLORS.length)];
+      const color = shuffledColors[i];
       rings.push({
         id: i,
-        color: randomColor,
+        color: color,
         radius: 60 + (i * 30),
-        isTarget: randomColor === targetColor,
+        isTarget: color === targetColor,
         isClickable: true,
       });
     }
@@ -129,11 +132,14 @@ export const useGameState = () => {
     const newColor = REACTOR_COLORS[Math.floor(Math.random() * REACTOR_COLORS.length)];
     setGameState(prev => ({ ...prev, targetColor: newColor }));
     
-    // Update reactor rings with new random colors
+    // Update reactor rings with unique colors
     setReactorRings(prev => {
-      const newRings = prev.map(ring => ({
+      // Create a shuffled array of colors to ensure uniqueness
+      const shuffledColors = [...REACTOR_COLORS].sort(() => Math.random() - 0.5);
+      
+      const newRings = prev.map((ring, index) => ({
         ...ring,
-        color: REACTOR_COLORS[Math.floor(Math.random() * REACTOR_COLORS.length)],
+        color: shuffledColors[index],
         isTarget: false,
       }));
       
@@ -192,7 +198,7 @@ export const useGameState = () => {
       isGameActive: true,
       lastClickTime: Date.now(),
       energyDecayTimer: 0,
-      timeRemaining: 4000, // Reset timer
+      timeRemaining: 5000, // Reset timer to first stage
       wrongClickStreak: 0,
       finalScore: 0,
       gameEnded: false,
@@ -264,7 +270,7 @@ export const useGameState = () => {
               ...prev,
               currentEnergy: 0,
               currentPiStage: '3',
-              timeRemaining: 4000, // Reset to first stage time
+              timeRemaining: 5000, // Reset to first stage time
               wrongClickStreak: 0,
               gameEnded: false,
             };

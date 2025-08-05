@@ -12,50 +12,50 @@ export const GAME_CONFIG: GameConfig = {
 export const PI_STAGES: PiStage[] = [
   {
     stage: '3',
-    energyRequired: 15,
-    colorChangeSpeed: 4000,
+    energyRequired: 10,
+    colorChangeSpeed: 5000,
     description: 'Building π = 3...'
   },
   {
     stage: '3.1',
-    energyRequired: 25,
-    colorChangeSpeed: 3000,
+    energyRequired: 20,
+    colorChangeSpeed: 4000,
     description: 'Building π = 3.1...'
   },
   {
     stage: '3.14',
-    energyRequired: 40,
-    colorChangeSpeed: 2000,
+    energyRequired: 35,
+    colorChangeSpeed: 3000,
     description: 'Building π = 3.14...'
   },
   {
     stage: '3.141',
-    energyRequired: 60,
-    colorChangeSpeed: 1500,
+    energyRequired: 50,
+    colorChangeSpeed: 2500,
     description: 'Building π = 3.141...'
   },
   {
     stage: '3.1415',
-    energyRequired: 85,
-    colorChangeSpeed: 1200,
+    energyRequired: 70,
+    colorChangeSpeed: 2000,
     description: 'Building π = 3.1415...'
   },
   {
     stage: '3.14159',
-    energyRequired: 115,
-    colorChangeSpeed: 1000,
+    energyRequired: 95,
+    colorChangeSpeed: 1500,
     description: 'Building π = 3.14159...'
   },
   {
     stage: '3.141592',
-    energyRequired: 150,
-    colorChangeSpeed: 800,
+    energyRequired: 125,
+    colorChangeSpeed: 1200,
     description: 'Building π = 3.141592...'
   },
   {
     stage: '3.1415926',
-    energyRequired: 200,
-    colorChangeSpeed: 700,
+    energyRequired: 160,
+    colorChangeSpeed: 1000,
     description: 'Building π = 3.1415926...'
   }
 ];
