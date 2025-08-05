@@ -80,14 +80,16 @@ export interface GameConfig {
 
 // Color palette for reactor rings
 export const REACTOR_COLORS = [
-  '#FF6B6B', // Red
-  '#4ECDC4', // Teal
-  '#45B7D1', // Blue
-  '#96CEB4', // Green
-  '#FFEAA7', // Yellow
-  '#DDA0DD', // Plum
-  '#98D8C8', // Mint
-  '#F7DC6F', // Gold
+  '#FF0000', // Bright Red
+  '#00FF00', // Bright Green
+  '#0000FF', // Bright Blue
+  '#FFFF00', // Bright Yellow
+  '#FF00FF', // Bright Magenta
+  '#00FFFF', // Bright Cyan
+  '#FF8000', // Bright Orange
+  '#8000FF', // Bright Purple
+  '#FF0080', // Bright Pink
+  '#00FF80', // Bright Lime
 ] as const;
 
 export type ReactorColor = typeof REACTOR_COLORS[number]; 

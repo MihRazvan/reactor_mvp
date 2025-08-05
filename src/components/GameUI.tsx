@@ -87,7 +87,7 @@ export const GameUI: React.FC<GameUIProps> = ({
         <div style={{ marginTop: '15px', fontSize: '14px', color: '#ccc' }}>
           {gameState.gameEnded 
             ? 'Click "Play Again" to start a new game!'
-            : 'Click the correct colored ring to generate energy!'
+            : 'Click the correct colored segment to generate energy!'
           }
         </div>
       </div>

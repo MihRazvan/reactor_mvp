@@ -45,19 +45,15 @@ export const useGameState = () => {
         id: i,
         color: color,
         radius: 60 + (i * 30),
-        isTarget: color === targetColor,
+        isTarget: false,
         isClickable: true,
       });
     }
     
-    // Ensure at least one ring matches the target color
-    const hasTargetColor = rings.some(ring => ring.color === targetColor);
-    if (!hasTargetColor) {
-      // Randomly select one ring to be the target color
-      const randomRingIndex = Math.floor(Math.random() * rings.length);
-      rings[randomRingIndex].color = targetColor;
-      rings[randomRingIndex].isTarget = true;
-    }
+    // Ensure exactly one ring matches the target color
+    const randomRingIndex = Math.floor(Math.random() * rings.length);
+    rings[randomRingIndex].color = targetColor;
+    rings[randomRingIndex].isTarget = true;
     
     setReactorRings(rings);
   }, [gameState.targetColor]);
@@ -132,7 +128,7 @@ export const useGameState = () => {
     const newColor = REACTOR_COLORS[Math.floor(Math.random() * REACTOR_COLORS.length)];
     setGameState(prev => ({ ...prev, targetColor: newColor }));
     
-    // Update reactor rings with unique colors
+    // Update reactor rings with unique colors and ensure one matches target
     setReactorRings(prev => {
       // Create a shuffled array of colors to ensure uniqueness
       const shuffledColors = [...REACTOR_COLORS].sort(() => Math.random() - 0.5);
@@ -143,19 +139,10 @@ export const useGameState = () => {
         isTarget: false,
       }));
       
-      // Ensure at least one ring matches the new target color
-      const hasTargetColor = newRings.some(ring => ring.color === newColor);
-      if (!hasTargetColor) {
-        // Randomly select one ring to be the target color
-        const randomRingIndex = Math.floor(Math.random() * newRings.length);
-        newRings[randomRingIndex].color = newColor;
-        newRings[randomRingIndex].isTarget = true;
-      } else {
-        // Update isTarget for rings that match the new color
-        newRings.forEach(ring => {
-          ring.isTarget = ring.color === newColor;
-        });
-      }
+      // Ensure exactly one ring matches the new target color
+      const randomRingIndex = Math.floor(Math.random() * newRings.length);
+      newRings[randomRingIndex].color = newColor;
+      newRings[randomRingIndex].isTarget = true;
       
       return newRings;
     });

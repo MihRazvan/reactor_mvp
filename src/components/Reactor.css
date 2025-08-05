@@ -47,6 +47,9 @@
     inset 0 0 50px rgba(0, 17, 34, 0.8);
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .reactor:hover {
@@ -55,77 +58,92 @@
     inset 0 0 50px rgba(0, 17, 34, 0.8);
 }
 
-.reactor-ring {
+.clickable-circle {
   position: absolute;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  transition: all 0.4s ease;
   cursor: pointer;
-  opacity: 0.9;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.ring-1 { 
-  width: 90%; 
-  height: 90%; 
-  top: 5%; 
-  left: 5%; 
-  border: 12px solid; 
+.pulse-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-.ring-2 { 
-  width: 75%; 
-  height: 75%; 
-  top: 12.5%; 
-  left: 12.5%; 
-  border: 10px solid; 
-}
-
-.ring-3 { 
-  width: 60%; 
-  height: 60%; 
-  top: 20%; 
-  left: 20%; 
-  border: 8px solid; 
-}
-
-.ring-4 { 
-  width: 45%; 
-  height: 45%; 
-  top: 27.5%; 
-  left: 27.5%; 
-  border: 6px solid; 
-}
-
-.ring-5 { 
-  width: 30%; 
-  height: 30%; 
-  top: 35%; 
-  left: 35%; 
-  border: 4px solid; 
+.flash-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 0, 0, 0.3);
+  pointer-events: none;
 }
 
 .reactor-core {
   position: absolute;
-  width: 15%;
-  height: 15%;
-  top: 42.5%;
-  left: 42.5%;
+  width: 25%;
+  height: 25%;
   border-radius: 50%;
-  background: radial-gradient(circle, #ffffff 0%, #4a9eff 50%, #001122 100%);
+  background: radial-gradient(circle, #ffffff 0%, #4a9eff 20%, #001122 60%, #000000 100%);
   box-shadow: 
-    0 0 30px rgba(74, 158, 255, 0.9),
-    0 0 60px rgba(74, 158, 255, 0.5);
-  animation: coreGlow 2s infinite ease-in-out;
+    0 0 40px rgba(74, 158, 255, 0.9),
+    0 0 80px rgba(74, 158, 255, 0.5),
+    inset 0 0 30px rgba(255, 255, 255, 0.4);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-@keyframes coreGlow {
-  0%, 100% { 
-    transform: scale(1); 
-    box-shadow: 0 0 30px rgba(74, 158, 255, 0.9), 0 0 60px rgba(74, 158, 255, 0.5);
-  }
-  50% { 
-    transform: scale(1.1); 
-    box-shadow: 0 0 40px rgba(74, 158, 255, 1), 0 0 80px rgba(74, 158, 255, 0.7);
-  }
+.core-inner {
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #4a9eff 40%, transparent 100%);
+  position: relative;
+}
+
+.core-inner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #4a9eff 50%, transparent 100%);
+  transform: translate(-50%, -50%);
+}
+
+.core-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid rgba(74, 158, 255, 0.6);
+}
+
+.core-pulse::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  border: 1px solid rgba(74, 158, 255, 0.3);
 }
 
 .game-status {
@@ -133,26 +151,6 @@
   font-size: 18px;
   margin-bottom: 15px;
   color: #4a9eff;
-}
-
-.pulse-effect {
-  animation: clickPulse 0.3s ease-out;
-}
-
-@keyframes clickPulse {
-  0% { transform: scale(1); filter: brightness(1); }
-  50% { transform: scale(1.05); filter: brightness(1.5); }
-  100% { transform: scale(1); filter: brightness(1); }
-}
-
-.wrong-click {
-  animation: wrongClick 0.3s ease-out;
-}
-
-@keyframes wrongClick {
-  0% { filter: brightness(1); }
-  50% { filter: brightness(0.5) hue-rotate(180deg); }
-  100% { filter: brightness(1); }
 }
 
 /* Responsive design */

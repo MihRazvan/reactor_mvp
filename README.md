@@ -14,12 +14,12 @@ A fast-clicking reactor building game where players click colored reactor layers
 ## 🎯 Core Mechanics
 
 ### Reactor System
-- **Multi-layered circular reactor** with 4-5 colored concentric rings
-- **Target color indicator** shows which ring to click
+- **Pie chart reactor** with 5 colored segments around a central core
+- **Target color indicator** shows which segment to click
 - **Progressive energy requirements**: 
-  - "3" needs 15 points
-  - "3.1" needs 25 points
-  - "3.14" needs 40 points
+  - "3" needs 10 points
+  - "3.1" needs 20 points
+  - "3.14" needs 35 points
   - And so on...
 
 ### Color Change Speeds
