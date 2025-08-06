@@ -1,0 +1,451 @@
+.tps-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.dashboard-section {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 18px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Main Gauge Section - Streamlined */
+.main-gauge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 160px;
+  border-color: #4ecdc4;
+  box-shadow: 0 0 18px rgba(78, 205, 196, 0.2);
+}
+
+.gauge-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.gauge-background {
+  position: relative;
+}
+
+.gauge-background svg {
+  width: 180px;
+  height: 110px;
+}
+
+.gauge-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #4a9eff, #4ecdc4, #ff6b6b);
+  border-radius: 5px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.diamond-inner {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  transform: rotate(-45deg);
+}
+
+.gauge-needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 55px;
+  background: white;
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%);
+  z-index: 5;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+.gauge-needle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+
+.gauge-labels {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.gauge-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.title-dot {
+  width: 5px;
+  height: 5px;
+  background: #4ecdc4;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(78, 205, 196, 0.8);
+}
+
+.gauge-value {
+  font-size: 28px;
+  font-weight: 700;
+  text-shadow: 0 0 12px currentColor;
+  animation: valuePulse 2s ease-in-out infinite;
+}
+
+@keyframes valuePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Individual TPS Meter - Streamlined */
+.individual-meter {
+  border-color: #4a9eff;
+  box-shadow: 0 0 12px rgba(74, 158, 255, 0.2);
+}
+
+.meter-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.meter-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.meter-bar {
+  flex: 1;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  overflow: hidden;
+  position: relative;
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: 7px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.meter-value {
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 45px;
+  text-align: center;
+  text-shadow: 0 0 6px currentColor;
+}
+
+.meter-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: #cccccc;
+  font-size: 11px;
+}
+
+/* Community Progress Ring - Streamlined */
+.community-ring {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.2);
+}
+
+.ring-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ring-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.ring-container svg {
+  width: 70px;
+  height: 70px;
+}
+
+.ring-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.ring-percentage {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff6b6b;
+  text-shadow: 0 0 6px rgba(255, 107, 107, 0.8);
+}
+
+.ring-label {
+  font-size: 9px;
+  color: #cccccc;
+  margin-top: 2px;
+}
+
+.ring-goal {
+  text-align: center;
+  color: #cccccc;
+  font-size: 11px;
+}
+
+/* Network Stats - Streamlined */
+.network-stats {
+  border-color: #4ecdc4;
+  box-shadow: 0 0 12px rgba(78, 205, 196, 0.2);
+}
+
+.stats-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 10px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4ecdc4;
+  margin-bottom: 2px;
+  text-shadow: 0 0 6px rgba(78, 205, 196, 0.5);
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #cccccc;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Combined Panel - Your TPS + Community Goal */
+.combined-panel {
+  border-color: #4a9eff;
+  box-shadow: 0 0 12px rgba(74, 158, 255, 0.2);
+}
+
+.combined-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.combined-header .meter-header,
+.combined-header .ring-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.combined-content {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.tps-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.goal-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.goal-side .ring-container {
+  margin-bottom: 6px;
+}
+
+.goal-side .ring-container svg {
+  width: 60px;
+  height: 60px;
+}
+
+.goal-side .ring-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.goal-side .ring-percentage {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ff6b6b;
+  text-shadow: 0 0 6px rgba(255, 107, 107, 0.8);
+}
+
+.goal-side .ring-label {
+  font-size: 8px;
+  color: #cccccc;
+  margin-top: 1px;
+}
+
+.goal-side .ring-goal {
+  text-align: center;
+  color: #cccccc;
+  font-size: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .game-layout {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 20px;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .reactor-section {
+    padding: 10px 0;
+  }
+  
+  .tps-dashboard-section {
+    order: 3;
+    min-height: 400px;
+  }
+  
+  .reactor-section {
+    order: 2;
+  }
+
+  .tps-dashboard {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px;
+  }
+
+  .dashboard-section {
+    min-width: 250px;
+    flex-shrink: 0;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .gauge-value {
+    font-size: 28px;
+  }
+
+  .meter-value {
+    font-size: 18px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+  }
+}
+
+/* Animation for gauge updates */
+@keyframes gaugeUpdate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.gauge-container:has(.gauge-value:not([style*="0"])) {
+  animation: gaugeUpdate 0.5s ease-out;
+} 
