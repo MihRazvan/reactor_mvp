@@ -1,35 +1,74 @@
 .game-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e);
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   position: relative;
   overflow: hidden;
+  padding: 20px;
+  gap: 20px;
 }
 
 .game-layout {
   display: grid;
   grid-template-columns: 300px 1fr 300px;
-  gap: 30px;
+  gap: 40px;
+  width: 100%;
   max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
-  min-height: 100vh;
-  position: relative;
-  z-index: 10;
-  align-items: start;
+  min-height: 60vh;
+  align-items: center;
+  flex-shrink: 0;
 }
 
-.game-ui-section {
+/* Left side - TPS Display */
+.tps-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: center;
   height: 100%;
+  padding: 20px 0;
 }
 
+/* Center - Reactor */
 .reactor-section {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
+}
+
+/* Right side - Game Progression */
+.game-progression-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 20px 0;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .game-layout {
+    grid-template-columns: 250px 1fr 250px;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 20px;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .tps-section,
+  .game-progression-section {
+    padding: 10px 0;
+  }
 }
 
 /* Background effects */
@@ -40,10 +79,10 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
 }
 
-.energy-particles {
+.background-effects .energy-particles {
   position: absolute;
   top: 0;
   left: 0;
@@ -54,6 +93,18 @@
     radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(69, 183, 209, 0.1) 0%, transparent 50%);
   animation: particleFloat 20s ease-in-out infinite;
+}
+
+.background-effects .core-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: coreGlowPulse 4s ease-in-out infinite;
 }
 
 @keyframes particleFloat {
@@ -68,18 +119,6 @@
   }
 }
 
-.core-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(78, 205, 196, 0.05) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: coreGlowPulse 4s ease-in-out infinite;
-}
-
 @keyframes coreGlowPulse {
   0%, 100% {
     opacity: 0.3;
@@ -88,47 +127,6 @@
   50% {
     opacity: 0.6;
     transform: translate(-50%, -50%) scale(1.1);
-  }
-}
-
-/* Responsive design */
-@media (max-width: 1200px) {
-  .game-layout {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  
-  .game-ui-section {
-    order: 2;
-  }
-  
-  .reactor-section {
-    order: 1;
-    height: auto;
-    min-height: 500px;
-  }
-}
-
-@media (max-width: 768px) {
-  .game-layout {
-    padding: 0.5rem;
-  }
-  
-  .core-glow {
-    width: 400px;
-    height: 400px;
-  }
-}
-
-@media (max-width: 480px) {
-  .game-layout {
-    padding: 0.25rem;
-  }
-  
-  .core-glow {
-    width: 300px;
-    height: 300px;
   }
 }
 

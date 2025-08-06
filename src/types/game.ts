@@ -10,6 +10,32 @@ export interface GameState {
   wrongClickStreak: number; // New: consecutive wrong clicks
   finalScore: number; // New: final score when game ends
   gameEnded: boolean; // New: whether game has ended
+  // TPS tracking
+  individualTPS: number; // Player's TPS
+  networkTPS: number; // Collective network TPS
+  totalClicks: number; // Total clicks for TPS calculation
+  sessionStartTime: number; // Session start for TPS calculation
+  // Game start state
+  gameStarted: boolean; // Whether the game has been started
+  countdown: number; // Countdown before game starts (3, 2, 1, GO!)
+  showStartScreen: boolean; // Whether to show the start screen
+}
+
+// TPS tracking interface
+export interface TPSTracker {
+  clicks: number[];
+  timestamps: number[];
+  currentTPS: number;
+  averageTPS: number;
+  peakTPS: number;
+}
+
+// Network TPS interface (for future multiplayer)
+export interface NetworkTPS {
+  totalTPS: number;
+  activePlayers: number;
+  targetTPS: number;
+  networkGoal: number;
 }
 
 export interface PiStage {

@@ -29,7 +29,7 @@ export const Reactor: React.FC<ReactorProps> = ({
     if (gameState?.wrongClickStreak && gameState.wrongClickStreak > 0) {
       return `Wrong clicks: ${gameState.wrongClickStreak}/3 - Be careful!`;
     }
-    return 'Click the correct colored segment to generate energy!';
+    return 'Click the correct colored segment to generate π² energy!';
   };
 
   // Circle positions in a perfect pentagon around the core
@@ -44,7 +44,7 @@ export const Reactor: React.FC<ReactorProps> = ({
   return (
     <div className="reactor-container">
       <div className="target-indicator">
-        <div className="target-label">Target Segment Color:</div>
+        <div className="target-label">Target π² Segment Color:</div>
         <div 
           className="target-color"
           style={{ backgroundColor: targetColor }}

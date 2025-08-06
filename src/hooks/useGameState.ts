@@ -7,23 +7,63 @@ import { fastSetService } from '../services/fastSetService';
 export const useGameState = () => {
   const [gameState, setGameState] = useState<GameState>({
     currentEnergy: 0,
-    currentPiStage: '3',
+    currentPiStage: '9',
     targetColor: REACTOR_COLORS[0],
-    isGameActive: true,
+    isGameActive: false, // Start as inactive
     lastClickTime: Date.now(),
     energyDecayTimer: 0,
     timeRemaining: 5000, // 5 seconds for first stage
     wrongClickStreak: 0,
     finalScore: 0,
     gameEnded: false,
+    // TPS tracking
+    individualTPS: 0,
+    networkTPS: 0,
+    totalClicks: 0,
+    sessionStartTime: Date.now(),
+    // Game start state
+    gameStarted: false,
+    countdown: 0,
+    showStartScreen: true, // Show start screen initially
   });
 
   const [reactorRings, setReactorRings] = useState<ReactorRing[]>([]);
   const [clickResult, setClickResult] = useState<ClickResult | null>(null);
   
-  const colorChangeInterval = useRef<number | null>(null);
-  const energyDecayInterval = useRef<number | null>(null);
-  const timerInterval = useRef<number | null>(null);
+  const colorChangeInterval = useRef<NodeJS.Timeout | null>(null);
+  const energyDecayInterval = useRef<NodeJS.Timeout | null>(null);
+  const timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const tpsTracker = useRef<{ clicks: number[]; timestamps: number[] }>({ clicks: [], timestamps: [] });
+
+  // Calculate TPS based on recent clicks
+  const calculateTPS = useCallback(() => {
+    const now = Date.now();
+    const windowSize = 1000; // 1 second window
+    const recentClicks = tpsTracker.current.timestamps.filter(
+      timestamp => now - timestamp < windowSize
+    );
+    return recentClicks.length;
+  }, []);
+
+  // Update TPS when click happens
+  const updateTPS = useCallback(() => {
+    const now = Date.now();
+    tpsTracker.current.timestamps.push(now);
+    
+    // Keep only last 10 seconds of data
+    const tenSecondsAgo = now - 10000;
+    tpsTracker.current.timestamps = tpsTracker.current.timestamps.filter(
+      timestamp => timestamp > tenSecondsAgo
+    );
+    
+    const currentTPS = calculateTPS();
+    
+    setGameState(prev => ({
+      ...prev,
+      individualTPS: currentTPS,
+      totalClicks: prev.totalClicks + 1,
+    }));
+  }, [calculateTPS]);
 
   // Get current π stage configuration
   const getCurrentPiStage = useCallback(() => {
@@ -65,6 +105,9 @@ export const useGameState = () => {
     if (!ring || !gameState.isGameActive || gameState.gameEnded) {
       return;
     }
+
+    // Update TPS tracking
+    updateTPS();
 
     const isCorrect = ring.color === gameState.targetColor;
     const energyGained = isCorrect ? ENERGY_CONFIG.correctClickGain : ENERGY_CONFIG.wrongClickGain;
@@ -121,7 +164,7 @@ export const useGameState = () => {
 
     // Clear click result after animation
     setTimeout(() => setClickResult(null), 200);
-  }, [reactorRings, gameState.targetColor, gameState.isGameActive, gameState.gameEnded, gameState.wrongClickStreak, getCurrentPiStage]);
+  }, [reactorRings, gameState.targetColor, gameState.isGameActive, gameState.gameEnded, gameState.wrongClickStreak, getCurrentPiStage, updateTPS]);
 
   // Change target color
   const changeTargetColor = useCallback(() => {
@@ -176,21 +219,65 @@ export const useGameState = () => {
     }
   }, [gameState.lastClickTime]);
 
-  // Restart game
+  // Start game function
+  const startGame = useCallback(() => {
+    setGameState(prev => ({
+      ...prev,
+      showStartScreen: false,
+      countdown: 3,
+    }));
+
+    // Start countdown
+    const countdownInterval = setInterval(() => {
+      setGameState(prev => {
+        if (prev.countdown > 1) {
+          return { ...prev, countdown: prev.countdown - 1 };
+        } else if (prev.countdown === 1) {
+          // Countdown finished, start the game
+          clearInterval(countdownInterval);
+          return {
+            ...prev,
+            countdown: 0,
+            gameStarted: true,
+            isGameActive: true,
+            sessionStartTime: Date.now(),
+            timeRemaining: getCurrentPiStage().colorChangeSpeed,
+          };
+        }
+        return prev;
+      });
+    }, 1000);
+
+    return () => clearInterval(countdownInterval);
+  }, [getCurrentPiStage]);
+
+  // Restart game function
   const restartGame = useCallback(() => {
+    const randomColor = REACTOR_COLORS[Math.floor(Math.random() * REACTOR_COLORS.length)];
     setGameState({
       currentEnergy: 0,
-      currentPiStage: '3',
-      targetColor: REACTOR_COLORS[0],
-      isGameActive: true,
+      currentPiStage: '9',
+      targetColor: randomColor,
+      isGameActive: false,
       lastClickTime: Date.now(),
       energyDecayTimer: 0,
-      timeRemaining: 5000, // Reset timer to first stage
+      timeRemaining: 5000,
       wrongClickStreak: 0,
       finalScore: 0,
       gameEnded: false,
+      // Reset TPS tracking
+      individualTPS: 0,
+      networkTPS: 0,
+      totalClicks: 0,
+      sessionStartTime: Date.now(),
+      gameStarted: false,
+      countdown: 0,
+      showStartScreen: true,
     });
-    setClickResult(null);
+    
+    // Reset TPS tracker
+    tpsTracker.current = { clicks: [], timestamps: [] };
+    
     initializeReactorRings();
   }, [initializeReactorRings]);
 
@@ -256,7 +343,7 @@ export const useGameState = () => {
             return {
               ...prev,
               currentEnergy: 0,
-              currentPiStage: '3',
+              currentPiStage: '9',
               timeRemaining: 5000, // Reset to first stage time
               wrongClickStreak: 0,
               gameEnded: false,
@@ -293,6 +380,7 @@ export const useGameState = () => {
     clickResult,
     handleRingClick,
     restartGame,
+    startGame,
     getCurrentPiStage,
   };
 }; 

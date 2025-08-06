@@ -8,55 +8,55 @@ export const GAME_CONFIG: GameConfig = {
   restartDelay: 2000, // 2 seconds
 };
 
-// π stages with progressive difficulty
+// π² stages with progressive difficulty
 export const PI_STAGES: PiStage[] = [
   {
-    stage: '3',
-    energyRequired: 10,
+    stage: '9',
+    energyRequired: 9,
     colorChangeSpeed: 5000,
-    description: 'Building π = 3...'
+    description: '🌱 Foundation - Building π² = 9...'
   },
   {
-    stage: '3.1',
-    energyRequired: 20,
+    stage: '9.8',
+    energyRequired: 18,
+    colorChangeSpeed: 4500,
+    description: '⚡ Power Up - π² = 9.8...'
+  },
+  {
+    stage: '9.86',
+    energyRequired: 30,
     colorChangeSpeed: 4000,
-    description: 'Building π = 3.1...'
+    description: '🌟 Quantum Leap - π² = 9.86...'
   },
   {
-    stage: '3.14',
-    energyRequired: 35,
+    stage: '9.869',
+    energyRequired: 45,
+    colorChangeSpeed: 3500,
+    description: '🔥 Fusion Core - π² = 9.869...'
+  },
+  {
+    stage: '9.8696',
+    energyRequired: 65,
     colorChangeSpeed: 3000,
-    description: 'Building π = 3.14...'
+    description: '🚀 Hyperdrive - π² = 9.8696...'
   },
   {
-    stage: '3.141',
-    energyRequired: 50,
+    stage: '9.86960',
+    energyRequired: 90,
     colorChangeSpeed: 2500,
-    description: 'Building π = 3.141...'
+    description: '💫 Cosmic Reactor - π² = 9.86960...'
   },
   {
-    stage: '3.1415',
-    energyRequired: 70,
+    stage: '9.869604',
+    energyRequired: 120,
     colorChangeSpeed: 2000,
-    description: 'Building π = 3.1415...'
+    description: '🌌 Stellar Nexus - π² = 9.869604...'
   },
   {
-    stage: '3.14159',
-    energyRequired: 95,
-    colorChangeSpeed: 1500,
-    description: 'Building π = 3.14159...'
-  },
-  {
-    stage: '3.141592',
-    energyRequired: 125,
-    colorChangeSpeed: 1200,
-    description: 'Building π = 3.141592...'
-  },
-  {
-    stage: '3.1415926',
+    stage: '9.8696044',
     energyRequired: 160,
-    colorChangeSpeed: 1000,
-    description: 'Building π = 3.1415926...'
+    colorChangeSpeed: 1500,
+    description: '⚛️ Pi² Master - π² = 9.8696044...'
   }
 ];
 
