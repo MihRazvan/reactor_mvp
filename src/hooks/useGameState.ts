@@ -20,7 +20,7 @@ export const useGameState = () => {
     individualTPS: 0,
     networkTPS: 0,
     totalClicks: 0,
-    sessionStartTime: Date.now(),
+    sessionStartTime: 0, // Don't start session time until game starts
     // Game start state
     gameStarted: false,
     countdown: 0,
@@ -30,9 +30,9 @@ export const useGameState = () => {
   const [reactorRings, setReactorRings] = useState<ReactorRing[]>([]);
   const [clickResult, setClickResult] = useState<ClickResult | null>(null);
   
-  const colorChangeInterval = useRef<NodeJS.Timeout | null>(null);
-  const energyDecayInterval = useRef<NodeJS.Timeout | null>(null);
-  const timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const colorChangeInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+  const energyDecayInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timerInterval = useRef<ReturnType<typeof setInterval> | null>(null);
   const tpsTracker = useRef<{ clicks: number[]; timestamps: number[] }>({ clicks: [], timestamps: [] });
 
   // Calculate TPS based on recent clicks
@@ -269,7 +269,7 @@ export const useGameState = () => {
       individualTPS: 0,
       networkTPS: 0,
       totalClicks: 0,
-      sessionStartTime: Date.now(),
+      sessionStartTime: 0, // Reset session time
       gameStarted: false,
       countdown: 0,
       showStartScreen: true,

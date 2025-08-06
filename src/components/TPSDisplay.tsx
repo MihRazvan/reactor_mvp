@@ -29,7 +29,7 @@ export const TPSDisplay: React.FC<TPSDisplayProps> = ({ gameState }) => {
         <div className="tps-label">transactions/sec</div>
         <div className="tps-stats">
           <div>Total Clicks: {gameState.totalClicks}</div>
-          <div>Session Time: {Math.floor((Date.now() - gameState.sessionStartTime) / 1000)}s</div>
+          <div>Session Time: {gameState.sessionStartTime > 0 ? Math.floor((Date.now() - gameState.sessionStartTime) / 1000) : 0}s</div>
         </div>
       </div>
 

@@ -14,7 +14,6 @@ interface GameUIProps {
 export const GameUI: React.FC<GameUIProps> = ({
   gameState,
   currentPiStage,
-  onRestart,
   onStart,
 }) => {
   const getNextStage = () => {

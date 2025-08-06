@@ -17,35 +17,40 @@
   gap: 40px;
   width: 100%;
   max-width: 1400px;
-  min-height: 60vh;
+  height: 100vh;
   align-items: center;
   flex-shrink: 0;
+  padding: 20px 0;
 }
 
 /* Left side - TPS Display */
 .tps-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   height: 100%;
   padding: 20px 0;
+  gap: 20px;
 }
 
 /* Center - Reactor */
 .reactor-section {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
+  gap: 20px;
 }
 
 /* Right side - Game Progression */
 .game-progression-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   height: 100%;
   padding: 20px 0;
+  gap: 20px;
 }
 
 /* Responsive design */

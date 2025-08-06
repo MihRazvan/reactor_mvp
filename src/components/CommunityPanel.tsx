@@ -7,7 +7,7 @@ interface CommunityPanelProps {
   gameState: GameState;
 }
 
-export const CommunityPanel: React.FC<CommunityPanelProps> = ({ gameState }) => {
+export const CommunityPanel: React.FC<CommunityPanelProps> = () => {
   // Simulate leaderboard data
   const leaderboard = [
     { rank: 1, name: "ReactorMaster", tps: 45.2, energy: 234, avatar: "🚀" },
